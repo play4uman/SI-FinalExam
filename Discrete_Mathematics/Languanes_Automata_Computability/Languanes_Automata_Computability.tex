@@ -40,7 +40,7 @@
 
 %%% SECTION TITLE APPEARANCE
 \usepackage{sectsty}
-\usepackage[bulgarian]{babel}
+
 
 \allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
 % (This matches ConTeXt defaults)
@@ -53,9 +53,13 @@
 
 %%% END Article customizations
 
+
+\usepackage[bulgarian]{babel}
+\usepackage{physics}
+
 %%% The "real" document content comes below...
 
-\title{Вмъкни името темата тук}
+\title{Езици, автомати, изчислимост}
 \author{Play4u}
 %\date{} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed 
@@ -63,13 +67,22 @@
 \begin{document}
 \maketitle
 
-\section{Подтема}
+\section{Крайни автомати}
 
-Ure mum
+Нека $X = \{x_1, x_2, ..., x_n$ е крайна азбука, $X^*$ е множеството от всички думи над $X$, $X_{*}$ е множеството от всички думи над $X$, а $X^{+} = X^{k}$ 
+- множеството от думите с дължина 
+$k$, $X^{1} = X$, а $X^{0}$ 
+се състои само от $\varepsilon$. \par
 
-\subsection{Подподтема}
+Всяко от множествата $X^{k}, k = 0, 1, 2 ...$ е крайно $\abs{X^{k}} = \abs{X}^{k}$ и тъй като $X^{*} = X^{0} \cup X^{1} \cup X^{2}...$ е обединение на изброима фамилия изброими множества можем да приложим Теорема 1.3.1 (need citation) и да получим следното \par
 
-lelkekxd
+\textbf{Следствие 4.1.1}: \emph{Множеството $X^{*}$ от думите над крайната азбука $X$ е изброимо} \par
+
+Не е трудно да се посочи и   
+
+\subsection{A subsection}
+
+More text.
 
 
 \end{document}
