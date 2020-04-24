@@ -76,7 +76,8 @@
 \newcommand{\notBelongsTo}{\centernot\in}
 
 \newcommand{\kda}{A = <Q, X, q_{0}, \delta, F>}
-\newcommand{\cfg}{\Gamma = <N, T, S, P>}
+\newcommand{\cfg}{\Gamma = <\mathcal{N}, \mathcal{T}, \mathcal{S}, \mathcal{P}>}
+\newcommand{\cfgVers}{G = \langle V, \Sigma, R, S \rangle}
 \newcommand{\nsa}{A = <Q, X, Z, q_{0}, z_{0}, \delta, F>}
 
 \newcommand{\italicBold}[1]{\textbf{\emph{#1}}}
@@ -169,5 +170,77 @@
 
 \definition Казваме че НСА $A = < Q, X, Z, q_{0}, z_{0}, \delta, \emptyset>$ \emph{разпознава с празен стек} думата $\alpha$, ако $< q_{0}, \alpha, z_{0} > \models < q, \epsilon, \epsilon>$, независимо от това какво е състоянието $q$. Езикът \\
 \centerline{$L_{A}^{\emptyset} = \curlies{\alpha | < q_{0}, \alpha, z_{0}> \models < q, \epsilon, \epsilon>}$,}\\
-наричаме език, разнознат с празен стек от НСА $A$   
+наричаме език, разнознат с празен стек от НСА $A$  
+
+\subsection{Връзка между НСА и КСГ}
+\theorem За всеки НСА $A$, разпознаващ езика $L$ съществува КСГ $\Gamma$ такава, че $L = L_{G}$\\
+
+\proof 
+Доказателството е взето от \path{https://store.fmi.uni-sofia.bg/fmi/logic/stefanv/files/eai/eai-notes.pdf}, стр. 63\par
+
+Ще разгледаме двете посоки на тръврдението поотделно.
+
+\enumNum
+\begin{enumerate}
+	\item Нека е дадена безконтекстна граматика $\cfgVers$. Нашата цел е да построим стеков автомат $P$, така че $L_{s}(P) = L(G)$. Нека \\
+	\centerline{$P = \langle \curlies{q}, \Sigma, \Sigma \cup V, S, q, \Delta, \emptyset$}, \\
+	където функцията на преходите е:\\
+	$\Delta(q, \epsilon, A) = \curlies{(q, \alpha) | A \to \alpha е правило в граматиката G}$ \\
+	$\Delta(q, \alpha, \alpha) = \curlies{(q, \epsilon)}$\\
+	\item Нека имаме $P = \langle Q, \Sigma, \Gamma, \Delta, s, \#, \emptyset \rangle$. 
+	Ще дефинираме безконтекстна граматика $G$, за която $L_{S}(P) = L(G)$. Променливите на граматиката са \\
+	\centerline{$V = \curlies{[q, A, p] | q, p \in Q, A \in \Gamma}$.} \\
+\end{enumerate}
+Правилата на $G$ са следните:
+
+\begin{itemize}
+	\item $S \to [s, \#, q]$, за всяко $q \in Q$; \\
+	\item $[q, A, q_{m+1}] \to a[q_{1}, B_{1}, q_{2}][q_{2}, B_{2}, q_{3}]...[q_{m}, B_{m}, q_{m+1}]$, където \\
+	\centerline{$(q_{1}, B_{1}...B_{m}) \in \Delta(q, a, A)$}\\
+	и произволни $q, q_{1}, ..., q_{m+1} \in Q, a \in \Sigma \cup \curlies{\epsilon}$. \\
+	Да обърнем внимание, че е възможно $m = 0$. Това означава, че $(q_{1}, \epsilon) \in \Delta(q, a, A)$ и тогава имаме правилото $[q, A, q_{1}] \to a$, където $а \iн \Sigma \cup \curlies{\epsilon}$. \\
+	Трябва да докажем, че: \\
+	\centerline{$[q, A, p]\to^{*}_{G} \alpha \leftrightarrow (q, \alpha, A) \vdash^{*}_{P}(p, \epsilon, \epsilon)$}.\\
+\end{itemize}
+$(\rightarrow)$ С пълна индукция по $i$ ще докажем, че \\
+\centerline{$(q, \alpha, A) \vdash^{i}_{P} (p, \epsilon, \epsilon) \rightarrow [q, A, p] \rightarrow^{*}_{G} \alpha$.}\\
+
+Ако $i = 1$, то е лесно, защото $\alpha \in \Sigma \cup \curlies{\epsilon}$ и $m = 0$.\\
+
+Ако $i > 1$, нека $\alpha = a \beta$. Тогава:\\
+\centerline{$(q, a \beta,A)\vdash_{P}(q_{1}, \beta, B_{1}...B_{n})\vdash^{i-1}_{P}(p, \epsilon, \epsilon)$}.\\
+
+Да разбием думата $\beta$ на $n$ части, $\beta = \beta_{1}...\beta_{n}$, със свойството, че след като прочетем $\beta_{i}$ сме премахнали променливата $B_{i}$ от върха на стека. Това означава, че: \\
+\centerline{$(q_{j}, \beta_{j}, B_{j}) \vdash^{l_j}_{P}(q_{j+1, \epsilon, \epsilon})$, за $j = 1, ..., n-1$,}\\
+\centerline{$(q_{n}, \beta_{n}, B_{n}) \vdash^{l_n}_{P}(p, \epsilon, \epsilon)$,}\\
+където $l_{1} + l_{2} + ... + l_{n} = i - 1$. Сега по \textbf{И.П}(индукционно предположение?) получаваме:\\
+$(q_{j}, \beta_{j}, B_{j})\vdash^{l_j}_{P}(q_{j+1}, \epsilon, \epsilon) \rightarrow [q_{j}, B_{j}, q_{j+1}] \to^{*}_{G}\beta_{j}$, за $j = 1, ..., n - 1$, \\
+$(q_{n}, \beta_{n}, B_{n})\vdash^{l_n}_{P}(p, \epsilon, \epsilon) \rightarrow [q_{n}, B_{n},p] \to^{*}_{G}\beta_{n}$.\\
+Обединявайки тези изводи с правилото\\
+\centerline{$[q, A, p] \to_{G} a[q_{1}, B_{1}, q_{2}]...[q_{n}, B_{n}, p]$,}\\
+получавам извода \\
+\centerline{$[q, A, p] \to ^{*}_{G} a \beta$}\\ \\
+
+($\leftarrow$) Отново с пълна индукция по $i$ ще докажем, че\\
+\centerline{$[q, A,p] \to^{i}_{G}\alpha \rightarrow (q, \alpha, A) \vdash^{*}_{P} (p, \epsilon, \epsilon) $.}\\
+
+Ако $i = 1$, то имаме $[q, A, p] \to \alpha$, където $\alpha = a$ или $\alpha = \epsilon$. Ако $i > 1$, то имаме, че $\alpha = a \beta$ и за някое $n$, \\
+\centerline{$[q, A, p] \to_{G} a[q_{1}, B_{1}, q_{2}][q_{2}, B_{2}, q_{3}]...[q_{n}, B_{n}, p] \to^{i-1}_{G} \beta$.}\\
+
+Отново нека $\beta = \beta_{1}...\beta_{n}$, където \\
+\centerline{$[q_{j}, B_{j}, q_{j+1}] \to ^{i_j}_{G} \beta_{j}$, за $j = 1, ..., n-1$,}\\
+\centerline{$[q_{n}, B_{n}, p] \to ^{i_n}_{G} \beta_{n}$,}\\
+
+където $i_{1} + i_{2} + ... + i_{n} = i - 1$. От \textbf{И.П} получаваме, че \\
+\centerline{$[q_{j}, B_{j}, q_{j+1}] \to ^{i_j}_{G} \beta_{j} \rightarrow (q_{j}, \beta_{j}, B_{j}) \vdash^{*}_{P}(q_{j+1}, \epsilon, \epsilon), j = 1, ..., n - 1$}\\
+\centerline{$[q_{n}, B_{n}, p] \to ^{i_n}_{G}\beta_{n} \rightarrow (q_{n}, \beta_{n}, B_{n}) \vdash^{*}_{P}(p, \epsilon, \epsilon)$,}\\
+
+Обединяквайки всичко което знаем, получаваме: \\
+\centerline{$(q, a \beta, A)\vdash_{P}(q_{1}, \beta_{1}...\beta_{n}, B_{1}...B_{n})$}\\
+\centerline{$\vdash^{*}_{P}(q_{2}, \beta_{2}...\beta_{n}, B_{2}...B_{n})$}\\
+\centerline{...}\\
+\centerline{$\vdash^{*}_{P}(q_{n}, \beta_{n}, B_{n})$}\\
+\centerline{$\vdash^{*}_{P}(p, \epsilon, \epsilon)$}\par
+
+
 \end{document} 
