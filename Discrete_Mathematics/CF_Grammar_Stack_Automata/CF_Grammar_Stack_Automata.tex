@@ -1,0 +1,147 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+
+
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+
+\usepackage[bulgarian]{babel}
+\usepackage{physics}
+\usepackage{amsmath}
+\usepackage{centernot}
+\usepackage{url}
+
+%%% The "real" document content comes below...
+
+\title{Контекстно свободни граматики. Стекови автомати}
+\author{Play4u}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+\newcommand{\lrangle}[1]{\left\langle #1 \right\rangle}
+
+\newcommand{\belongsTo}{\in}
+\newcommand{\notBelongsTo}{\centernot\in}
+
+\newcommand{\kda}{A = <Q, X, q_{0}, \delta, F>}
+\newcommand{\cfg}{\Gamma = <N, T, S, P>}
+
+\newcommand{\italicBold}[1]{\textbf{\emph{#1}}}
+\newcommand{\definition}{\italicBold{Дефиниция:}}
+\newcommand{\theorem}{\italicBold{Теорема:}}
+\newcommand{\lemma}{\italicBold{Лема:}}
+\newcommand{\proof}{\italicBold{Доказателство:}}
+
+\newcommand{\curlies}[1]{\{#1\}}
+
+\newcommand{\enumNum}{\renewcommand{\theenumi}{\arabic{enumi}}}
+\newcommand{\enumlet}{\renewcommand{\theenumi}{\alph{enumi}}}
+
+\section{Контекстно свободни граматики}
+Всеки контекстно-свободен език се поражда от контекстно-свободна граматика $\cfg$, правилата на която са от вида $А \to \alpha, A \in N, \alpha \in (N \cup T)^{+}$.
+Ако в граматиката няма аксиома в дясба част на правило, допустимо е и правилото $S \to \epsilon$, позволяващо ни да извеждаме само празната дума. \par
+
+На всеки извод в контекстно-свободната граматика ще  съпоставим дървовидна структура със следната 
+
+\definition{Нека $\cfg$ е контекстно-свободна граматика. Дървото $D(V, E)$ с корен $r \in V$, с наредба на синовете и функция $f: V \to (N \cup T)$< съпоставяща на всеки връх буква от азбуките на граматиката, наричаме \emph{дърво на извод} в $\Gamma$, ако 
+
+\enumlet
+\begin{enumerate}
+	\item За всеки нелист $v$ на $D, f(v) \in N$, като $f(r) = S$;\\
+	\item За всеки лист $l$ на $D, f(l) \in T$;\\
+	\item За всеки нелист $v$ с наредена последвоателност от синове $v_{i_1}, v_{i_2}, ..., v_{i_k}$, е в сила $f(v_{i_1})f(v_{i_2})...f(v_{i_k})\in P$. 
+\end{enumerate}
+
+\italicBold{Бележка от автора: В конспекта за държавния изпит се споменава въпроса "Дърво на синтаксиса", докато в учебника по ДСТР присъства единствено понятието "Дърво на изводите" (което ще се използва и в този документ). Автора предполага, че двете са едно и също чрез следните доводи:} 
+
+\enumNum
+\begin{enumerate}
+	\item Предполага, че превода на "извод" на англ. е "derivation".\\
+	\item Според \path{https://en.wikipedia.org/wiki/Parse_tree} Syntax tree $\equiv$ Derivation tree \\
+\end{enumerate} \par
+
+Дума на \emph{дърво на извод} дефинираме индуктивно, следвайки една от дефинициите на понятието дърво.\\
+
+\definition Нека $D(V, E)$ е дърво на извод в граматиката $\cfg$
+
+\enumlet
+\begin{enumerate}
+	\item Ако $D$ е дърво от вида
+		\centerline{$S$-------$\epsilon$}
+		то дума на $D$ е $\epsilon$;\\
+	\item Нека $D'(\curlies{l}, \curlies{})$ е поддърво на дървото на извод $D$, състоящо се само от лист $l$. Дума на $D'$ е $f(l)$;\\
+	\item Нека $D'$ е поддърво на $D$ с корен $r', D_{1}, D_{2}, ..., D_{k}$ са всички поддървета на $D'$ с корени синовете на $r'$, подредену в съотвествие с наредбата на тези синове и $\alpha_{i}$ е думата на поддървото $D_{i}, i = 1, 2, ..., k$. Тогава думата на $D'$ е $\alpha_{1}, \alpha_{2}, ...,\alpha_{k}$. 
+\end{enumerate} \par
+
+\theorem Нека $\cfg$ е КСГ. Съществува дърво на извод $D$ в $\Gamma_{A}$ с дума $\omega$ ще покажем, че $A^{\Gamma} \models^{A} \omega$ \\
+\centerline \emph{Insert proof here}
+
+\definition Ако в КСГ $\Gamma$ съществува повече от едно дърво на извод за някоя дума $\omega$, тогава наричаме $\Gamma$ \emph{еднозначна} \\ 
+
+\definition КСЕ(език) $L$, закойто всяка КСГ, която го поражда е нееднозначна, наричаме \emph{нееднозначен език}.
+
+\section{Нормална форма на Чомски}
+
+\italicBold{Не успях да намеря информация в учебника по ДСТР. Всичко в този раздел  е взето от \path{https://store.fmi.uni-sofia.bg/fmi/logic/stefanv/files/eai/eai-notes.pdf} стр. 57} \\ \par
+
+\definition Една КСГ е в нормална форма на Чомски ако всяко правило е от вида \\
+\centerline{$A \to BC$ и $A \to \alpha$}
+Като $B$ и $C$ не могат да бъдат променливата за начало $S$\\ 
+\centerline{\emph{Insert proof here}}
+
+\end{document} 
+
+\section{Стекови автомати}
+
