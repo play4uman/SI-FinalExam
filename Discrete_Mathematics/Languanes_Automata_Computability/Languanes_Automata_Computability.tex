@@ -171,8 +171,8 @@ $\Delta_{A'}(q_{0}, \beta) = q^{*} \notBelongsTo F$ и $\beta$ отново не
 $\Delta(q, \epsilon) = \qquad \qquad \qquad \qquad \{q\}\\
 \Delta(q, x) =
 	\begin{cases}
-		\delta(q,x) \qquad \qquad \; \forall q,x, \text{, за които } 				\delta \text{ е дефинирана} \\ 
-		\text{недефинирана} \quad \text{ако } \delta(q,x) \text{не е 				дефинирана} 
+		\delta(q,x) \qquad \qquad \; \forall q,x, \text{, за които } \delta \text{ е дефинирана} \\ 
+		\text{недефинирана} \quad \text{ако } \delta(q,x) \text{не е дефинирана} 
 	\end{cases}\\
 \Delta(q, \alpha x) = U_{i = 1}^{l} \delta(q^{pi}, x) \quad \quad \Delta(q, \alpha) = \{q_{p1}, q_{p2},..., q_{pn}\}.$  \par
 
@@ -198,13 +198,13 @@ t_{[r1, r2, ..., rm]}, \text{ ако } \{q_{r1}, q_{r2}, ..., q_{rm}\}
 
 \renewcommand{\theenumi}{\alph{enumi}}
 \begin{enumerate}
-	\item Нека $\omega = \epsilon$. Тогава $\Delta_{A'}(t_{|0|}, 				\epsilon) = t_{|0|}, a \Delta_{A}(q_{0}, \epsilon)= \{q_{0}				\}$ и твърдението е в сила
-	\item Допускаме верността на твърдението за някоя дума $\alpha$ 			и ще покажем, че $\Delta_{A'}(t_{t|0|}, \alpha x) = t_{[r1, 			r2, ..., rm]} \leftrightarrow \Delta_{A}(q_{0}, \alpha x) = 			\{q_{r1}, q_{r2}, ..., q_{rm}\}$.
-	\item Нека $\Delta_{A'}(t_{|0|}, \alpha x) = t_{[r1, r2, ..., 				rm]}$, като
-		$\Delta_{A'}(t_{|0|}, \alpha) = t_{[p1, p2, ..., pl]}$. 				Тогава $\delta'(t_{[p1, p2, ..., pl]}, x) = t_{[r1, r2, ..., 		rm]}$ и съгласно построението на $\delta'\{q_{r1}, q_{r2}, 				..., q_{rm} \} = $
-		$\cup_{i=1}^{l}\delta(q_{pi}, x).$ Но от индуктивното 					допускане 
-		$\Delta_{A}(q_{0}, \alpha) = \{q_{p1}, q_{p2}, ..., q_{pl}\}			$ и следователно 
-		$\Delta_{A}(q_{0}, \alpha x) = \{q_{r1}, q_{r2}, ..., q_{rm}			\}$. Разсъжденията в другата посока са подобни.
+	\item Нека $\omega = \epsilon$. Тогава $\Delta_{A'}(t_{|0|}, \epsilon) = t_{|0|}, a \Delta_{A}(q_{0}, \epsilon)= \{q_{0}\}$ и твърдението е в сила
+	\item Допускаме верността на твърдението за някоя дума $\alpha$  и ще покажем, че $\Delta_{A'}(t_{t|0|}, \alpha x) = t_{[r1, r2, ..., rm]} \leftrightarrow \Delta_{A}(q_{0}, \alpha x) = 			\{q_{r1}, q_{r2}, ..., q_{rm}\}$.
+	\item Нека $\Delta_{A'}(t_{|0|}, \alpha x) = t_{[r1, r2, ..., rm]}$, като
+		$\Delta_{A'}(t_{|0|}, \alpha) = t_{[p1, p2, ..., pl]}$. Тогава $\delta'(t_{[p1, p2, ..., pl]}, x) = t_{[r1, r2, ...,rm]}$ и съгласно построението на $\delta'\{q_{r1}, q_{r2}, 				..., q_{rm} \} = $
+		$\cup_{i=1}^{l}\delta(q_{pi}, x).$ Но от индуктивното допускане 
+		$\Delta_{A}(q_{0}, \alpha) = \{q_{p1}, q_{p2}, ..., q_{pl}\} $ и следователно 
+		$\Delta_{A}(q_{0}, \alpha x) = \{q_{r1}, q_{r2}, ..., q_{rm} \}$. Разсъжденията в другата посока са подобни.
 \end{enumerate} \par
 
 Като вземем предвид дефиницията на $F'$ и току що доказаното, получаваме $\Delta_{A'}(t_{|0|}, \alpha) \in F' \leftrightarrow 
@@ -218,9 +218,9 @@ $\epsilon, \emptyset, *, +, (,)$ (ако някоя от тези букви е 
 \definition Нека $\tilde{X} = X \cup \{\epsilon, \emptyset, *, +, (,)\}$
 
 \begin{enumerate}
-	\item Думите $\epsilon, \emptyset$ и $x_{i}, i = 1,2,...,n$ от 				$X^{*}$ са регулярни изрази. Съответните им регулярни езици 			над $Х$ са $\{\epsilon\}, \emptyset, и \curlies{x_{i}, i = 				1,2,..., n}$
+	\item Думите $\epsilon, \emptyset$ и $x_{i}, i = 1,2,...,n$ от $X^{*}$ са регулярни изрази. Съответните им регулярни езици над $Х$ са $\{\epsilon\}, \emptyset, и \curlies{x_{i}, i = 				1,2,..., n}$
 	\item нека $\alpha, \beta \in \tilde{X^{*}}$ са регулярни изрази 
-		и съответните им регулярни езици са $L_{\alpha} \text{ и } 				L_{\beta}$. Тогава $(\alpha) + (\beta), (\alpha).(\beta) 				\text{ и } (\alpha)^{*}$ са регулярни изрази, а съответните 			им езици са $L_{\alpha} + L_{\beta}, L_{\alpha}.L_{\beta} 				\text{ и } L_{\alpha}^{\beta}$
+		и съответните им регулярни езици са $L_{\alpha} \text{ и } L_{\beta}$. Тогава $(\alpha) + (\beta), (\alpha).(\beta) \text{ и } (\alpha)^{*}$ са регулярни изрази, а съответните 			им езици са $L_{\alpha} + L_{\beta}, L_{\alpha}.L_{\beta} 				\text{ и } L_{\alpha}^{\beta}$
 	\item Няма други регулярни изрази и езици
 \end{enumerate} 
 
@@ -231,9 +231,9 @@ $ \begin{array}{ll}%
 	a + b & \curlies{a,b} \\
 	a(a + b) & \curlies{aa, ab} \\
 	a^{*} & \curlies{\epsilon, a, a^{2}, ..., a^{i}, ...} \\
-	a^{*}(a + b) & \curlies{a, b, aa, ab, a^{2}a, a^{2}b, ..., a^{i}			a, a^{i}b, ...} \\
-	(a + b)^{*} & X^{*} \\
-	a^{*}b + b^{*}a & \curlies{b, a, ab, ba, a^{2}b, b^{2}a, ..., 				a^{i}b, b^{i}a, ...}
+	a^{*}(a + b) & \curlies{a, b, aa, ab, a^{2}a, a^{2}b, ..., a^{i} a, a^{i}b, ...} \\
+	(a + b)^{*} & X^{*} \\                                           
+	a^{*}b + b^{*}a & \curlies{b, a, ab, ba, a^{2}b, b^{2}a, ..., 	 a^{i}b, b^{i}a, ...}
 \end{array}$%
 
 \subsection{Теорема на клини} 
@@ -242,11 +242,11 @@ $ \begin{array}{ll}%
 \proof 
 \renewcommand{\theenumi}{\arabic{enumi}}
 \begin{enumerate}
-	\item Ще покажем s индукция по дефиницията на регулярни езици, 				че всеки регулярен език е автоматен. Действително $						\curlies{\epsilon, \emptyset} \text{ и } \curlies{x_{i}, i 				= 1,2,...,n}$ са автомарни езици, защото са крайни. Ако 				допуснем, че регулярните езици $L_{\alpha}$ и $L_{\beta}$, 				съответни на регулярните изрази $\alpha$ и $\beta$ са 					автоматни тогава
-		$L_{\alpha} + L_{\beta}, L_{\alpha}.L_{\beta}$ и $L_{\alpha}			^{*}$ са автоматни, защото са сума, произведение и итерация 			на автоматни езици, съответно. Тъй като други регулярни 				езици няма, всеки регулярен език е автоматичен. 
-	\item Нека езикът $L$ е автоматен. Ще докажен, че $L$ е 					регулярен език. Съществува КДА $\kda$ такъв, че $L = L_{A}$. 		Нека автоматът $A$ e представен с крайния ориентиран 					мултиграф $G$. Нека състоянията на $А$ са $Q = 							\curlies{q_{0}, q_{1}, ..., q_{n}}$ и $F = \curlies{q_{p1}, 			q_{p2}, ..., q_{pr}}$. 
-		Да означим с $R_{ij}^{k}$ множеството от маршрутите в $G$ от 		връх $q_{i}$ до връх $q_{j}$, които не използват като 					вътрешни върхове $q_{k}, q_{k+1}, ..., q_{n}$.
-		Очевидно, всеки маршрут от $q_{i}$ до $q_{j}$ означава 					определена дума $\alpha \in X^{*}$, такава че $\Delta(q_{i}, 		\alpha) = q_{j}$. Tака на множеството от маршрути $R_{ij}				^{k}$ можем да гледаме като на множество от съответните думи 		от $X^{*}$, т.е. $R_{ij}^{k}$ e език над $X^{*}$ - маршрутен 		език. В автомата няма състояния с номера по-големи от $n$ и 			затова $R_{ij}^{k}$ е езикът на всички маршрути от $q_{i}$ 				до $q_{j}$, когато $k > n$.
+	\item Ще покажем s индукция по дефиницията на регулярни езици, че всеки регулярен език е автоматен. Действително $\curlies{\epsilon, \emptyset} \text{ и } \curlies{x_{i}, i 				= 1,2,...,n}$ са автомарни езици, защото са крайни. Ако 				допуснем, че регулярните езици $L_{\alpha}$ и $L_{\beta}$, 				съответни на регулярните изрази $\alpha$ и $\beta$ са 					автоматни тогава
+		$L_{\alpha} + L_{\beta}, L_{\alpha}.L_{\beta}$ и $L_{\alpha} ^{*}$ са автоматни, защото са сума, произведение и итерация на автоматни езици, съответно. Тъй като други регулярни 				езици няма, всеки регулярен език е автоматичен. 
+	\item Нека езикът $L$ е автоматен. Ще докажен, че $L$ е регулярен език. Съществува КДА $\kda$ такъв, че $L = L_{A}$. Нека автоматът $A$ e представен с крайния ориентиран 					мултиграф $G$. Нека състоянията на $А$ са $Q = 							\curlies{q_{0}, q_{1}, ..., q_{n}}$ и $F = \curlies{q_{p1}, 			q_{p2}, ..., q_{pr}}$. 
+		Да означим с $R_{ij}^{k}$ множеството от маршрутите в $G$ от връх $q_{i}$ до връх $q_{j}$, които не използват като вътрешни върхове $q_{k}, q_{k+1}, ..., q_{n}$.
+		Очевидно, всеки маршрут от $q_{i}$ до $q_{j}$ означава определена дума $\alpha \in X^{*}$, такава че $\Delta(q_{i}, \alpha) = q_{j}$. Tака на множеството от маршрути $R_{ij}				^{k}$ можем да гледаме като на множество от съответните думи 		от $X^{*}$, т.е. $R_{ij}^{k}$ e език над $X^{*}$ - маршрутен 		език. В автомата няма състояния с номера по-големи от $n$ и 			затова $R_{ij}^{k}$ е езикът на всички маршрути от $q_{i}$ 				до $q_{j}$, когато $k > n$.
 \end{enumerate}
 		
 \subsection{Минимизация на КДА}
@@ -294,8 +294,8 @@ $\forall \alpha \in X^{*}, \Delta (q_{0}, \alpha) \neq q$, а достижимо
 \renewcommand{\theenumi}{\alph{enumi}}
 
 \begin{enumerate}
-	\item Нека $\omega \in L_{A}$, т.е. $\Delta([\epsilon], \omega) 			\in F. \text{ Но } \Delta([\epsilon], \omega) = [\epsilon 				\omega] = [\omega]$, т.е съществува $p_{j}, [\omega] = 					[\alpha_{pj}]$. Но тогава$\omega \in L$, защото всички думи 			на $[\alpha_{pj}]$ са от $L$ според дефиницията на $					[\alpha_{pj}]$.\\
-	\item Нека $\omega \in L$. Тогава $[\omega] = [\alpha_{pj}]$ за 			някое $p_{j}$ и $\Delta([\epsilon], \omega) = [\omega] = 				[\alpha_{pj}]\in F$. Следователно $\omega \in L_{A}$. \\
+	\item Нека $\omega \in L_{A}$, т.е. $\Delta([\epsilon], \omega) \in F. \text{ Но } \Delta([\epsilon], \omega) = [\epsilon \omega] = [\omega]$, т.е съществува $p_{j}, [\omega] = 					[\alpha_{pj}]$. Но тогава$\omega \in L$, защото всички думи 			на $[\alpha_{pj}]$ са от $L$ според дефиницията на $					[\alpha_{pj}]$.\\
+	\item Нека $\omega \in L$. Тогава $[\omega] = [\alpha_{pj}]$ за някое $p_{j}$ и $\Delta([\epsilon], \omega) = [\omega] = [\alpha_{pj}]\in F$. Следователно $\omega \in L_{A}$. \\
 \end{enumerate}\par
 
 	Следователно езикът $L$ е автоматен \par
