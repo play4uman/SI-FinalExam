@@ -1,0 +1,219 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+
+
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+
+\usepackage[bulgarian]{babel}
+\usepackage{physics}
+\usepackage{amsmath}
+\usepackage{centernot}
+\usepackage{url}
+\usepackage{graphicx}
+\graphicspath{ {.} }
+\usepackage{amsfonts}
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+%%% The "real" document content comes below...
+
+\title{1. Графи. Дървета. Обхождане на графи}
+\author{Play4u}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed
+         
+
+\newcommand{\lrangle}[1]{\left\langle #1 \right\rangle}
+
+\newcommand{\belongsTo}{\in}
+\newcommand{\notBelongsTo}{\centernot\in}
+
+\newcommand{\oversetModels}[1]{\overset{#1}{\models}}
+
+\newcommand{\kda}{A = <Q, X, q_{0}, \delta, F>}
+\newcommand{\cfg}{\Gamma = <\mathcal{N}, \mathcal{T}, \mathcal{S}, \mathcal{P}>}
+\newcommand{\cfgVers}{G = \langle V, \Sigma, R, S \rangle}
+\newcommand{\nsa}{A = <Q, X, Z, q_{0}, z_{0}, \delta, F>}
+\newcommand{\graph}{G(V, E, f_{G})}
+
+\newcommand{\italicBold}[1]{\textbf{\emph{#1}}}
+\newcommand{\definition}{\italicBold{Дефиниция: }}
+\newcommand{\theorem}{\italicBold{Теорема: }}
+\newcommand{\lemma}{\italicBold{Лема: }}
+\newcommand{\proof}{\italicBold{Доказателство: }}
+\newcommand{\redText}[1]{\textcolor{red}{#1}}
+
+\newcommand{\curlies}[1]{\{#1\}}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\newcommand{\enumNum}{\renewcommand{\theenumi}{\arabic{enumi}}}
+\newcommand{\enumlet}{\renewcommand{\theenumi}{\alph{enumi}}} 
+
+\begin{document}
+\maketitle
+
+\italicBold{Конспект:} Дефиниция за краен ориентиран (мулти)граф и краен неориентиран (мулти)граф. Дефиниция за маршрут (контур) в ориентиран мултиграф и път (цикъл) в неориентиран мултиграф. Свързаност и свързани компоненти на граф. Дефиниция на дърво и кореново дърво. Доказателство, че всяко кореново дърво е дърво и $|V| = |E|+1$. Покриващо дърво на граф. Обхождане на граф в ширина и дълбочина. Ойлерови обхождания на мултиграф. Теореми за съществуване на Ойлеров цикъл (с доказателство) и Ойлеров път. 
+
+\section{Крайни мултиграфи}
+
+\qquad\definition Краен ориентиран мултиграф: Нека $V = \curlies{v_{1}, v_{2}, ..., v_{n}}$ е крайно множество, елементите на което наричаме \textit{върхове}, а $E = \curlies{e_{1}, e_{2}, ..., e_{m}}$ е крайно множество, елементите на което наричаме \textit{ребра}. Функцията $f_{G} : E \to V \times V$, съпоставящо на всяко ребро, наредена двойка от върхове, наричаме \textit{краен ориентиран мултиграф}. Казваме още, че е зададен краен ориентиран мултиграф $G$ с върхове $V$, ребра $E$ и \textit{свързваща функция} $f_{G}$ и го означаваме с $\graph$\\
+
+\definition Краен неориентиран мултиграф: Нека $G(V, E)$ е краен ориентиран граф, такъв, че релацията $E \subseteq V \times V$ е антирефлексивна и симетрична. В такъв случай $G(V, E)$ наричаме \textit{краен неориентиран граф} или просто \textit{граф}.\\
+
+\definition Нека $\graph$ е ориентиран мултиграф. Редицата ит редуващи се върхове и ребра на $G: v_{i_0}, e_{l_1}, v_{i_1}, e_{l_2}, v_{i_2}, ..., v_{i_k-1}, e_{l_k}, v_{i_k}$ в която $f_{G}(e_{l_j}) = (v_{i_j-1}, v_{i_j}), j = 1, 2, ..., k$, наричаме \textit{маршрут} в $G$ от $v_{i_0}$ до $v_{i_k}$. Числото $k$ Наричаме \textit{дължина} на маршрута.\\
+При задаване на маршрут в ориентиран граф не е задължително да се посочват ребрата, тъй като между два върха не може да има повече от едно ребро. Достатъчно е маршрутът да се зададе с редицата $v_{i_0}, v_{i_1}, ..., v_{i_k}$ от върхове, за които $(v_{i_j}, v_{i_j+1})\in E, j = 0, 1, ..., k - 1$.\\
+
+\definition Нека $G(V, E)$ е мултиграф. Редицата от редуващи се върхове и ребра на $G: v_{i_0}, e_{l_1}, v_{i_1}, e_{l_2}, v_{i_2}, ..., v_{i_k-1}, e_{l_k}, v_{i_k}$, в която $e_{l_j} = (v_{i_j-1}, v_{i_j}), j = 1, 2, ..., k$ и $v_{i_j-1} \neq v_{i_j+1}, j = 1, 2, ..., k-1$ наричаме \textit{път} в $G$ между $v_{i_0}$ и $v_{i_k}$. Числото $k$ в този случай наричаме \textit{дължина на пътя}. Всеки връх $v_{i}$ на мултиграфа е \textit{тривиален път} - с дължина 0 - между $v_{i}$ и $v_{i}$. , т.е. такъв който не минава през други върхове, само когато $E$ съдържа примката $(v_{i}, v_{i})$., а дължината на такъв маршрут е единица. \\
+Редицата от редуващи се върхове и ребра на $G$ $v_{i_0}, e_{l_1}, v_{i_1}, e_{l_2}, v_{i_2}, ..., v_{i_k-1}, e_{l_k}, v_{i_k}$, в която освен посочените по-рано свойства е в сила и $v_{i_k} = v_{i_0}$, наричаме цикъл. Минималната възможна дължина на цикъл е 3,и всеки връх който участва в цикъл е от степен поне 2. \\
+
+\definition Свързана компонента на граф: \\
+\textbf{$\mathcal{P}_{G}$:} За всеки краен неориентиран граф $G(V, E)$ дефинираме релацията $\mathcal{P}_{G} \subseteq V \times V$ така: $(v_{i}, v_{j}) \in \mathcal{P}_{G} \leftrightarrow$, когато съществува път в $G$ от $v_{i}$ до $v_{j}$. Тази релация е релация на еквивалентност.\\ 
+Върховете от всеки клас на еквивалентност $V' \subseteq V$ на релацията $\mathcal{P}_{G}$ индуцират в $G(V, E)$ по един подграф, който наричаме \textit{свързана компонента} нa $G$. \\
+
+\definition Свързаност на граф: Графът $G(V, E)$ се нарича \textit{свързан}, ако $\forall v_{i}, v_{j} \in V, \exists$ път в $G$ от $v_{i}$ до $v_{j}$. Дефиницията е приложима за ориентирания случай(както и за мултиграф), със замяна на понятието път с маршрут, но тъй като понятието е твърде силно ще въведен алтернативно такова. Ориентрианият граф $G(V, E)$ ще наричаме \textit{слабо свързан}, ако $\forall v_{i}, v_{j} \in V, \exists$ маршрут $G$ от $v_{i}$ до $v_{j}$ или от $v_{j}$ до $v_{i}$. \\
+Всеки свързан граф има една свързана компонента.    
+
+\section{Дървета}
+
+\definition Дърво: Свързан граф без цикли наричаме \textit{дърво}, а несвързан граф без цикли - \textit{гора}.\\
+
+\definition Всяко кореново дърво е дърво.\\
+\proof Ще покажем, че всяко дърво с корен е свързан граф и няма цикли. Доказателството ще направим с индукция по дефиницията на дръво с корен.
+
+\definition Кореново дърво: Графът $D(\curlies{r}, \curlies{})$ с един връх $r$ и без ребра наричаме \textit{дърво с корен $r$(кореново дърво)}. Единственият връх $r$ е и единствен \textit{лист} на това дърво. 
+
+\enumlet
+\begin{enumerate}
+	\item За тривиалното дърво $D(\curlies{r}, \curlies{})$ е очевидно, че е свързан граф, защото съществува тривиалният път от $r$ до $r$ с дължина 0. Освен това $D$ няма цикли, тъй като няма ребра. Следователно тривиалното кореново дърво е дърво. \\
+	\item Да допуснем, че дървото $D(V, E)$ с корен $r$ е свързан граф без цикли. \\
+	\item Ще докажем, че дървото $D'(V'. E') = D'(V \cup \curlies{w}, E \cup \curlies{(u, w)})$ с корен $r$, полученото от $D$ с присъединяването на новия връх $w$ към $u \in V$ е също свързан граф и няма цикли. 
+\end{enumerate}\par
+
+За произволни два върха $v_{i}$ и $v_{j}$ от $V$ съществува път от $v_{i}$ до $v_{j}$ в $D$, защото според индукционното допускане $D$ е свързан граф. Следователно съществува такъв път и в $D'$. Път от произволен връх $v_{i} \in V$ до $w$ в $D'$ получаваме, като към съществуващия(съгласно индукционното допускане) в $D$ път от $v_{i}$ до $u$ добавим реброто $(u, w)$, с което $w$ е присъединен към $u$. Не е възможно $w$ да съвпада с върха, предхождащ $u$, защото $w \not\in V$. Следователно в $D'$ съществува път между всеки два върха и $D'$ е свързан граф. \par
+
+Съгласно индукционното допускане в $D$ няма цикли. За да има цикъл в $D'$, той непременно трябва да съдържа реброто $(u, w)$. Това обаче не е възможно, тъй като $w$ е само край на реброто $(u, w), d(w) = 1$ и съгласно дефиницията не може да участва в цикъл. Следователно допускането е погрешно и в $D'$ също няма цикъл.\par 
+
+\theorem Нека $D(V, E)$ е дърво с корен $r$. Тогава $|V|= |E| + 1$. \\
+\proof \\
+
+\enumlet
+\begin{enumerate}
+	\item За тривиалното кореново дърво $D(V = \curlies{r}, E = \curlies{})$ имаме $|V| = 1, |E| = 0$ и следователно $|V| = |E| + 1$.\\
+	\item Нека $D(V, E)$ е кореново дърво и $|V| = |E|+1$\\
+	\item Присъединяваме $w$ към върха $u \in V$ и получаваме кореновото дърво $D'(V', E'), V' = V \cup \curlies{w}, E' = E \cup \curlies{(u, w)}$. Сега $|V'| = |V| + 1, |E'| = |E| + 1$. Следователно $|V'| - |E'| = |V| - |E| = 1$ и $|V'| = |E'| = 1$ \\
+\end{enumerate} \par
+
+\definition Покриващо дърво на граф: Нека $G(V, E)$ е граф, а \\$D(V, E'), E' \subseteq E$ е дърво. Тогава $D$ наричаме \textit{покриващо дърво} на $G$. \\
+\italicBold{Опционално:} Графът $V(G, E)$ има покриващо дърво тогава и само тогава, когато е свързан. 
+
+\section{Обхождане на графи}
+
+\subsection{В широчина и дълбочина}
+
+\italicBold{Обхождане в ширина:} Същественото за тази алгоритмична схема е понятието \textit{ниво на обхождане}, което представлява подмножество на множеството от върхове на свързания граф $G(V, E)$. В резултат на обхождането в ширина, $V$ се разбива на нива $L_{0}, L_{1}, ..., L_{k}$ по следния начин:
+
+\enumNum
+\begin{enumerate}
+	\item Избираме \textit{начален връх} $r$ на обхождането (началният връх може да е зададен и предварително). Образуваме $L_{0} = \curlies{r}$ и нека $l = 0$. Обявяваме върха за обходен \\
+	\item Ако $L_{0} \cup L_{1} \cup ... \cup L_{l} = V$, тогава обхождането е завършено. В противен случай преминаваме към 3. \\
+	\item Нека сме обходили върховете от нивата $L_{0}, L_{1}, ..., L_{l}$. Образуваме нивото $L_{l+1}$ от всички необходени върховe $v_{i} \not\in L_{0} \cup L_{1} \cup ... \cup L_{l}$ които са съседи на върховете от $L_{l}$. Обявяваме върховете от $L_{l+1}$ за обходени. Нека $l = l+1$ и преминаваме към 2 
+\end{enumerate} \par
+
+\italicBold{Обхождане в дълбочина:} При тази схема основни са понятията \textit{текущ връх $t$ } и \textit{баща} на върха $t - p(t)$. Началният връх на обхождането $r$ и тук е зададен предварително или се определя произволно. Обхождането става по следния начин:
+
+\enumNum
+\begin{enumerate}
+	\item Обхождаме началния връх $r$. При това $t = r$, а $p(t)$ е неопределен.\\
+	\item Търсим необходен връх, който е съседен на текущия $t$:\\
+	\begin{enumerate}[label*=\arabic*.]
+    	\item ако има такъв връх, тогава ("стъпка напред"): $p(v) = t, t = v$ и обявяваме $v$ за обходен. Преминаваме към 2.
+    	\item ако няма такъв връх:
+    		\begin{enumerate}[label*=\arabic*.]
+    			\item ако $t \neq r, p(t)$ е определен. Тогава $t = p(t)$ и преминаваме към 2. ("стъпка назад").\\
+    			\item ако $t = r$ обхождането е завършило\\
+  			\end{enumerate}
+  	\end{enumerate}
+\end{enumerate} \par
+
+С други думи схемата за обхождане в дълбочина предписва да опитваме стъпки напред(в дълбочина)докато това е възможно, а в слувай на невъзможност, да направим стъпка назад и отново да опитаме стъпка напред. Затова тази алгоритмична техника често е наричана \textit{обхождане с връщане}.
+
+\subsection{Ойлерови обхождания}
+
+\definition \textit{Ойлеров път} в свързания мултиграф $G(V, E)$ наричаме път, който минава еднократно през всяко ребро на мултиграфа. Ако Ойлеровият път има начало и край, които съвпадат, тогава той се нарича \textit{Ойлеров цикъл}. Мултиграф, ребрата на който образуват Ойлеров цикъл, наричаме \textit{Ойлеров}. \par
+
+\theorem \italicBold{Л. Ойлер} Свързаният мултиграф $G(V, E)$ е Ойлеров(съдържа Ойлеров цикъл) тогава и само тогава, когато всеки връх на $G$ е с четна степен. \par
+
+\proof 
+
+\enumNum
+\begin{enumerate}
+	\item Нека ребрата на $G(V, E)$ образуват Ойлеров цикъл. Тогава всеки връх има четна степен, защото при обхождане на мултиграфа по Ойлеровия цикъл на всяко ребро "влизащо" във връх $v_{i}$ съответства ребро(различно от първото, според дефиниция за път), "излизащо" от $v_{i}$м а цикълът съдържа всички ребра точно по един път.\\
+	\item Нека мултиграфът $G(V, E)$ е свързан и такъв, че всеки връх има четна степен. Ще опитаме процедура, която построява Ойлеров цикъл от всички ребра на мултиграфа. \par 
+		Започваме със следните стъпки:
+		\begin{enumerate}[label*=\arabic*.]
+    		\item Нека $r$ е произволен връх на мултиграфа . Обявяваме го за текущ $t$.\\
+    		\item Докато е възможно, строим път по следното правило: от върха $t$, в който се ниамираме, преминаваме към някой съседен $v$ по необходено ребро. Използваното ребро обявяваме за обходено, а върхът $t$ за текущ. \par
+    		Да допуснем, че когато правилото от 2.2 не е вече приложимо, то $t \neq r$. Тогава ще се окаже, че степента на $t$ е нечетна, тъй като влизайки за последен път в $t$ сме отбелязали като обходено едно ребро, а при всяко предно преминаване през този връх сме отбелязали като обходени по две негови ребра. Това е противоречие. Следователно, когато правилото от стъпка 2.2 не е вече приложимо, $t = r$ и всички обходени на този етап ребра образуват цикъл $C$. \\
+    		\item Ако цикълът $C$ съдържа всички ребра - край на обхождането. Построен е Ойлеров цикъл. \\
+    		\item В противен случай премахваме от мулриграфа ребрата на намерения цикъл. Полученият мултиграф е такъв, че всеки връх е с четна степен. Търсим построеният връх $r'$, от който излиза поне едно необходено ребро. Ако допуснем, че такъв няма, при суловието, че не всички ребра са обходени, ще получим противоречие със свързаността на мултиграфа. Повтаряме действията от стъпка 2.2 с начален връх $r = r'$ и построяваме нов цикъл. Сега разкъсваме двата цикъла в общия им връх $r'$ и с отъждествяването на получените краища два по два, получаваме нов цикъл $C$ и преминаваме към 2.3.    
+  		\end{enumerate} 
+\end{enumerate} \par
+
+Алгоритъмът ще завърши работа когато всички ребра се изчерпят и се построи Ойлеров цикъл. Следователно мултиграфът е Ойлеров. \par
+
+\italicBold{Следствие: }Свързаният мултиграф $G(V, E)$ съдържа Ойлеров път, който не е Ойлеров цикъл, тогава и само тогава, когато има точно 2 върха с нечетна степен.  
+
+
+
+
+\end{document} 
