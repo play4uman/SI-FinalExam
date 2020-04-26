@@ -1,0 +1,203 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+
+
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+
+\usepackage[bulgarian]{babel}
+\usepackage{physics}
+\usepackage{amsmath}
+\usepackage{centernot}
+\usepackage{url}
+\usepackage{graphicx}
+\graphicspath{ {.} }
+\usepackage{amsfonts}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{systeme}
+
+%%% The "real" document content comes below...
+
+\title{1. Базис. Размерност. Координати. Линейни уравнения...}
+\author{Play4u}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed
+         
+
+\newcommand{\lrangle}[1]{\left\langle #1 \right\rangle}
+
+\newcommand{\oversetModels}[1]{\overset{#1}{\models}}
+
+\newcommand{\italicBold}[1]{\textbf{\emph{#1}}}
+\newcommand{\definition}{\italicBold{Дефиниция: }}
+\newcommand{\theorem}{\italicBold{Теорема: }}
+\newcommand{\lemma}{\italicBold{Лема: }}
+\newcommand{\proof}{\italicBold{Доказателство: }}
+\newcommand{\redText}[1]{\textcolor{red}{#1}}
+
+\newcommand{\curlies}[1]{\{#1\}}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\newcommand{\enumNum}{\renewcommand{\theenumi}{\arabic{enumi}}}
+\newcommand{\enumlet}{\renewcommand{\theenumi}{\alph{enumi}}} 
+
+\begin{document}
+\maketitle
+
+\italicBold{Конспект:} Определяне на базис, размерност и координати. Всеки два базиса на ненулево крайномерно пространство $V$ над $F$ притежават равен брой вектрои. $V$ е $n$ - мерно линейно пространство над $F$ тогава и само тогава, когато във $V$ съществуват $n$ на брой линейное независими вектора и всеи $n+1$ на брой вектора са линейно зависими. Всяка линейно независима система вектори в крайномерното пространство може да се допълни до базис. Системи линейни уравнения. Теорема на Руше. Връзка между решенията на хомогенна и нехомогенна система линейни уравнения.
+
+
+\section{Базис, размерност, координати}
+
+\italicBold{Лема 1. Опционално, но нужно за доказателствата по-долу: } нека $V$ е линейно пространство и $a_{1}, a_{2}, ..., a_{s}$ са линейно независими вектори от $V$. Ако \textbf{\textit{a}} е вектор от $V$, който не принадлежи на $l(a_{1}, a_{2}, ..., a_{s})$, то векторите $a_{1}, a_{2}, ..., a_{s}; a$ продължават да бъдат линейно независими.\\\par   
+
+\definition Базис: Нека $V$ е ненулево линейно пространство над полето $F$ и $B$ е непразно подмножество на $V$. Ще казваме, че $B$ е базис на $V$ над $F$(или само базис на $V$, ако $F$ се подразбира), ако: \\
+
+\enumNum
+\begin{enumerate}
+	\item $B$ е линейно независима система от вектори \\
+	\item всеки вектор от $V$ е линейна комбинация на векторите от $B$ с коефициенти от $F$, т.е $V = l(B)$.
+\end{enumerate}\par
+
+\definition Размерност на линейно пространство: Нека $U$ е линейно пространство на $\mathbb{R}^{n}$. Броят на векторите във всеки базис на $U$ се нарича \textit{размерност} на $U$ и се означава с $dimU$
+
+\definition Кординати: Нека $V$ е линейно пространство с размерност $n$ над полето $F$ и $b_{1}, b_{2}, ..., b_{n}$ е фиксиран базис на $V$. Нека $\textbf{v} \in V$ и \\
+\centerline{$\lambda_{1}b_{1} + \lambda_{2}b_{2}+...+\lambda_{n}b_{n} \; (\lambda_{i} \in F, i = 1, 2,..., n)$}
+Еднозначно определените(от базиса $b_{1}, b_{2}, ..., b_{n}$) числа $\lambda_{1}, \lambda_{2}, ..., \lambda_{n}$ ще наричаме координати на \textbf{ $v$ в базиса $b_{1}, b_{2}, ..., b_{n}$}. \\\par
+
+\theorem Всеки два базиса на ненулевото крайномерно пространство $V$ над полето $F$ съдържат равен брой вектори\\
+\proof Нека $a_{1}, a_{2}, ..., a_{n}$ и $b_{1}, b_{2}, ..., b_{k}$ са два базиса на $V$. Тогава всеки вектор от втория базис се изразява линейно чрез векторите от първия базис. Тъй като векторите $b_{1}, b_{2}, ..., b_{k}$ са линейно независими, от основната лема на линейната алгебра следва, че $k \leq n$. Аналогично $n \leq k$. Следователно $k = n$. \\\par
+
+\theorem Нека $V$ е линейно пространство над полето $F$. Тогава \\
+\enumlet
+\begin{enumerate}
+	\item $V$ е крайномерно и $dimV = n$ тогава и само тогава, когато във $V$ съществуват $n$ на брой линейно независими вектора и всеки $n + 1$ на брой вектора са линейно зависими. Така всеки $n$ На брой линейно независими вектора от $V$ са базис на $V$; \\
+	\item (\textbf{Опционално: })$V$ е безкрайномерно тогава и само тогава, когато за всяко естествено число $n$ във $V$ има $n$ на брой линейно независими вектора.\\
+\end{enumerate}
+ 
+\proof \\
+\enumlet
+\begin{enumerate}
+	\item Нека $V$ е крайномерно и $dimV = n$. Тогава $V$ притежава базис $a_{1}, a_{2}, ..., a_{n}$, състочщ се от $n$ на брой вектора. Нека $b_{1}, b_{2}, ..., b_{n+1}$ е произволна система от $n+1$ на брой вектора от $V$. Тези вектори се изразяват линейно чрез базисните вектори $a_{1}, a_{2}, ..., a_{n}$. От основната лема на линейната алгебра следва, че векторите $b_{1}, b_{2}, ..., b_{n+1}$ са линейно зависими. \par
+		Обратно, нека $a_{1},a_{2},..., a_{n}$ са линейно независими вектори от $V$ и всеки $n+1$ на брой вектора от $V$ са линейно зависими. Нека $a$ е произволен вектор от $V$. Ако $a \not\in l(a_{1}, a_{2},...,a_{n})$, според основната лема векторите $a_{1}, a_{2},...,a_{n}$ са линейно независими и всеки вектор $a$ от $V$ е тяхна линейна комбинация. Следователно тези вектори са базис на $V$ и значи $V$ е крайномерно и $dimV = n$.\par
+		Накрая нека $dimV = n$ и $b_{1}, b_{2}, ..., b_{n+1}$ е произволна система от $n$ на брой линейно независими вектори от $V$. Ако съществува вектор $V$ извън $l(b_{1}, b_{2}, ..., b_{n+1})$, прилагайки \textbf{лема 1} бихме получили $n+1$ линейно независими вектора във $V$, което противоречи на $dimV = n$. Следователно $V = l(b_{1}, b_{2}, ..., b_{n+1})$ и значи тези вектори са базис на $V$.\\
+		\item (\textbf{Опционално: }) Нека $V$ е безкрайномерно и $n$ е произволно естествено число. Да допуснем, че във $V$ няма $n$ линейно независими вектора(т.е. всеки $n$ вектора във $V$ са линейно зависими). Тогава от подусловие \textbf{a} следва, че $dimV < n$, противоречие. \par
+			Обратно, ако за всяко естествено число $n$ във $V$ има $n$ на брой линейно независими вектора, отново от подусловие \textbf{a} следва, че не е възможно $V$ да е крайномерно пространство, т.е. $V$ е безкрайномерно\\\par
+\end{enumerate}
+
+
+\italicBold{Твърдение: } Всяка линейно независима система от вектори в крайномерното пространство $V$ може да се допълни до базис на $V$.\\
+\proof Нека $b_{1}, b_{2}, ..., b_{s}$ са линейно независими вектори от $V$. Ако $v = l(b_{1}, b_{2}, ..., b_{s})$, то тези вектори са базис на $V$. В противен случай съществува вектор $b_{s+1}$ от $V$ такъв, че $b_{s+1} \not\in l(b_{1}, b_{2}, ..., b_{s})$. Според \textbf{лема 1} векторите $b_{1}, b_{2}, ..., b_{s}, b_{s+1}$ са линейно независими. Ако $V = l(b_{1}, b_{2}, ..., b_{s}, b_{s+1})$, то тези вектори са базис на $V$. В противен случай съществува вектор $b_{s+2}$ от $V$, такъв че $b_{s+2} \not\in l(b_{1}, b_{2}, ..., b_{s}, b_{s+1})$. Продължавайки по този начин(процесът не може да бъде безкраен тъй като $dimV < \infty$), достигаме до системата вектори $b_{1}, b_{2}, ..., b_{s}, b_{s+1},...,b_{n}$, които са линейно независими и $V = l(b_{1}, ..., b_{s}, b_{s+1}, ..., b_{n})$.Следователно тези вектори са базис на $V$.
+
+\section{Системи линейни уравнения. Теорема на Руше}
+Следната система е система от линейни уравнения.\\
+\centerline{ 
+$
+   \left\{\begin{aligned}
+     a_{11}x_{1} + ... + a_{1n}x_{n} = b_{1}\\
+     ... 		 \\
+     a_{m1}x_{1}+ ... + a_{mn}x_{n} = b_{m}
+   \end{aligned}\right.
+$} \\
+Да означим с $A$ и $\bar{A}$ съответно матрицата и разщирената матрица на системата.\\\par
+
+\subsection{Теорема на Руше}
+\theorem (\italicBold{на Руше }) Системата(горе) е съвместима тогава и само тогава, когато $r(A) = r(\bar{A})$\\
+\proof (\italicBold{Опционално?: }) Да означим с $b_{1},...,b_{n}$ векторните стълбове на матрицата $A$, а с $b$ - стълба от свободните членове. Имаме \\
+\centerline{$r(A) = r(b_{1},...,b_{n}) \leq r(b_{1},...,b_{n};b) = r(\bar{A})$.}
+При това $r(A) = r(\bar{A})$ тогава и само тогава, когато \textbf{b} е линейна комбинация на $b_{1},...,b_{n}$, т.е. съществуват числа $\lambda_{1},...,\lambda_{n}$, такива че $\lambda_{1}b_{1}+...+\lambda_{n}b_{n} = b$. Но това е еквивалентно на факта, че $n$-орката $(\lambda_{1},...,\lambda_{n})$ е решение на системата.
+
+\subsection{Връзка между решенията на хомогенна и нехомогенна система}
+
+\italicBold{Източник: \path{https://store.fmi.uni-sofia.bg/fmi/algebra/lect_notes_ev/hom_sis.pdf}, стр. 9}\\
+Нека (\textbf{*}) е една линейна система, а \textbf{**} съответната й хомогенна система:\\
+\centerline{ 
+\textbf{* = }
+$
+   \left\{\begin{aligned}
+     a_{11}x_{1} + ... + a_{1n}x_{n} = b_{1}\\
+     ... 		 \\
+     a_{s1}x_{1}+ ... + a_{sn}x_{n} = b_{s}
+   \end{aligned}\right.
+$
+\qquad \qquad
+\textbf{** = }
+$
+   \left\{\begin{aligned}
+     a_{11}x_{1} + ... + a_{1n}x_{n} = 0\\
+     ... 		 \\
+     a_{s1}x_{1}+ ... + a_{sn}x_{n} = 0
+   \end{aligned}\right.
+$
+}
+
+Тогава са изпълнени следните свойства:
+\enumlet
+\begin{enumerate}
+	\item Ако $\alpha = (\alpha_{1}, ..., \alpha_{n})$ и $\beta = (\beta_{1},...,\beta_{n})$ са решения на нехомогенната система \textbf{*}, тогава тяхната разлика \\
+		\centerline{$\alpha - \beta = (\alpha_{1} - \beta_{1},...,\alpha_{n} - \beta_{n})$.}
+		е решение на хомогенната система \textbf{**};\\
+	\item Ако $\alpha = (\alpha_{1},...,\alpha_{n})$ е решение на система \textbf{*} и $\gamma = \gamma_{1}, ..., \gamma_{n}$ е решение на хомогенната система \textbf{**}, тогава тяхната сума \\
+		\centerline{$\alpha + \gamma = (\alpha_{1} + \gamma_{1},..., \alpha_{n} + \gamma_{n})$}
+		е решение на системата \textbf{*};\\
+	\item Ако системата \textbf{*} е съвместима и $\alpha = (\alpha_{1},...,\alpha_{n})$ е едно нейно решение, тогава всяко решение на тази система е от вида\\
+		\centerline{$\alpha + \gamma = (\alpha_{1} + \gamma_{1},...,\alpha_{n}+\gamma_{n})$,}
+		където $\gamma = (\gamma_{1},...,\gamma_{n})$ е произволно решение на хомогенната система \textbf{**}.\\
+\end{enumerate}
+
+\centerline{\textit{Insert proof here}}
+  
+\end{document}
+
+
+
