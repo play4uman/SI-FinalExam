@@ -1,0 +1,241 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+
+
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+
+\usepackage[bulgarian]{babel}
+\usepackage{physics}
+\usepackage{amsmath}
+\usepackage{centernot}
+\usepackage{url}
+\usepackage{graphicx}
+\graphicspath{ {.} }
+\usepackage{amsfonts}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{systeme}
+
+
+%%% The "real" document content comes below...
+
+\title{27. Дискретни разпределения. Равномерно, биномно, на Поасон...}
+\author{Play4u}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed
+         
+
+\newcommand{\lrangle}[1]{\left\langle #1 \right\rangle}
+
+\newcommand{\oversetModels}[1]{\overset{#1}{\models}}
+
+\newcommand{\italicBold}[1]{\textbf{\emph{#1}}}
+
+\newcommand{\definition}{\italicBold{Дефиниция: }}
+\newcommand{\theorem}{\italicBold{Теорема: }}
+\newcommand{\lemma}{\italicBold{Лема: }}
+\newcommand{\proof}{\italicBold{Доказателство: }}
+\newcommand{\statement}{\italicBold{Твърдение: }}
+\newcommand{\source}{\italicBold{Източник: }}
+
+\newcommand{\integral}[4]{\displaystyle \int_{#1}^{#2}#3\,#4}
+
+\newcommand{\redText}[1]{\textcolor{red}{#1}}
+
+\newcommand{\curlies}[1]{\{#1\}}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\newcommand{\enumNum}{\renewcommand{\theenumi}{\arabic{enumi}}}
+\newcommand{\enumlet}{\renewcommand{\theenumi}{\alph{enumi}}} 
+
+\begin{document}
+\maketitle
+
+\italicBold{Конспект: } На изпита комисията дава две разпределения, върху които се развива въпросът. Дефиницията на дискретно вероятностно разпределение на случайна величина. Свойства на вероятностите (неотрицателност и норминарост, монотонност и адитивност). За всяко от дадените две разпределения да се посочи пример, при който то възниква. Да се пресметне математическото очакване и дисперсията на всяко от тези очаквания. При пресмятане може да се използва пораждаща функция или пораждаща моментите функция, но тя трябва да се дефинира и да се покажат основните й свойства (без доказателство).
+
+
+\section{Дискретни разпределения}
+\source \path{http://qub.ac.uk/helm/HELM_2008/pages/workbooks_1_50_jan2008/Workbook37/37_1_dscrt_prob_distn.pdf}\\\par
+
+Тройката $(\Omega, \aleph, P)$, където $(\Omega, \aleph(\Omega))$ е измеримо пространство и $P$ е вероятностна мярка, дефинирана върху него юе наричаме \textit{вероятностно пространство}\\\par
+
+Случайна величина наричаме всяка функция $\xi : \Omega \to \mathbb{R}$, такава, че за произволно реално $x(\forall x \in \mathbb{R})$, множеството $\curlies{\omega:\xi(\omega)\leq }\in \mathfrak{F}$, т.е. множествено събитие.\\\par
+
+\definition Разпределение на дискретна случайна величина:\\
+Случайна величина $X$ и нейните разпределения се наричат \textit{дискретни} ако стойностите на $X$ могат да бъдат представени като наредена редица, пр. $x_{1}, x_{2}, x_{3}...$, със стойности на вероятността $p_{1}, p_{2}, p_{3}...$. Тоест $P(X=x_{i})=p_{i}$. По общо, дискретното разпределение $f(x)$ може да бъде дефинирано чрез:\\
+\centerline{$f(x)=
+\begin{cases} 
+      p_{i} & \text{ ако } x=x_{i} \qquad i = 1,2,3... \\
+      0 & text{иначе}
+\end{cases}$}
+
+Функцията на разпределението $F(x)$ се получава чрез сумите дефинирани по следния начин:\\
+\centerline{$F(x)=\displaystyle \sum_{x_{i} \leq x}f(x_{i})=\sum_{x_{i}\leq x}p_{i}$}
+Сумиране вероятностите $p_{i}$ за които $x_{i}$ е по-малко или равна на $x$. Това ни дава прекъсната функция със "стъпки" с размер $p_{i}$, за всяка стойност $x_{i}$ от $X$. Тази функция е дефинирана за всички стойности, не само за стойностите $x_{i}$ от $X$\\
+
+Малко по-сбито(Научи това):\\
+Нека $X$ е случайна величина, съответваща на експеримент. Нека стойностите на $X$ са обозначени от $x_{1}, x_{2},...,x_{n}$ и нека $P(X=x_{i})$ е вероятността $x_{i}$ да се случи. Имаме две необходими условия за валидно дискретно разпределение:\\
+\begin{itemize}
+	\item $P(X = x_{i}) \geq 0 \; \forall \; x_{i}$\\
+	\item $\displaystyle \sum_{i=1}^{n}P(X=x_{i})=1$\\
+\end{itemize}
+Трябва да отбележим, че $n$ може да е безкрайно.\\
+(Тези две твърдения са достатъчни да гарантираме, че $P(X=x_{i})\leq 1 \; \forall \; x_{i}$)
+
+\section{Свойства на вероятностите}
+\source \path{http://fmi.wikidot.com/prob1#toc17}
+
+\subsection{Неотрицателност:} 
+Всяка вероятност е от 0 до 1.\\
+0 означава невъзможно, 1 означава 100\% сигурно, т.е.\\
+\centerline{$\forall \; E \to 0 \leq P(E) \leq 1$}
+
+\subsection{Норминарност:}
+Вероятността на достоверно събитие е едно. т.е.\\
+\centerline{$P(\Omega) = 1$}
+
+\subsection{Адитивност:}
+Имаме изброимо безкрайна редица от несъвместими събития $E_{1}, E_{2},...,E_{n}$. Вероятността на тяхното обединение се дава по следния начин:\\
+\centerline{$P\displaystyle(\sum_{i=1}^{\infty}E_{i})=\sum_{i=1}^{\infty}P(E_{i})$}
+
+\subsection{Монотонност}
+Ако $A,B \in \aleph(\Omega)$ и $A \subseteq B$, то\\
+\centerline{$P(A) \leq P(B)$}
+
+\section{Конкретни дискретни разпределния}
+\source \path{http://pharmfac.net/social_pharm_lectures/TWMS_L/L07.pdf}\\
+
+Може би $EX$(математическото очакване) и $\sigma_{X}$(дисперсията) трябва да се изчислят, а не да се ползват наготово.
+
+\subsection{Равномерно разпределение}
+Нека $a<b$
+\definition Непрекъснатата случ. величина(с.в.) $X$ се нарича \textit{равномерно разпределена в интервала} $[a,b]$, ако има плътност на разпределение \\
+\centerline{$p(x)=
+\begin{cases} 
+      \frac{1}{b-a} & \text{ ако } x \in [a,b],\\
+      0 & \text{ ако } x \not\in [a,b].
+\end{cases}$}
+Фунцкията на разпределение на такава с.в. е \\
+$F(x) = 
+\begin{cases} 
+      0 & \text{ ако } x < a,\\
+      \frac{x-a}{b-a} & \text{ ако } a \leq x \leq b,\\
+      1 & \text{ ако } x > b.
+\end{cases}$
+Имаме, че\\
+\centerline{$EX = \frac{a+b}{2}, \\qquad DX=\frac{(b-a)^{2}}{12}, \qquad \sigma_{X}=\frac{|b-a|}{\sqrt{12}}$.}
+Равномерно разпределените случайни величини намират приложение: 
+\begin{itemize}
+	\item в задачи от геометрична вероятност\\
+	\item за формиране на непрекъсната с.в. $Y$ с помощта на с.в. $X$, която е равномерно разпределена в интервала $(0,1)$ и се получава на компютър със стандартна програма "генератор на случайни числа"\\
+\end{itemize}
+Пр.: хвърляне на честен зар. Тогава
+\begin{itemize}
+	\item $X=$ шанса да се падне ези\\
+	\item $X=$ шанса да се падне четно число\\
+	\item $X=$ шанса да се падне число, по малко от 3\\
+\end{itemize}
+
+\subsection{Биномно разпределение}
+Нека $n \geq 1$ е цяло число, $p \in [0,1]$ и $q=1-p$.\\
+\definition Дискретната с.в. $X$ има \textit{биномно разпределние} с параметри $n, p$, ако приема стойности $0,1,...,m,...,n$ с вероятности\\
+\centerline{$p_{m}=P(X=m)=P_{n}(n)=C_{n}^{m}p^{m}q^{n-m}$.}
+Имаме, че $X=X_{1}+...+X_{n}$, където $X_{k}, k=1,...,n$ са независими случайни величини, които имат разпределение на Бернули и $EX_{k}=p, DX_{k}=pq, k = 1,...,n$. Тогава от свойството(*) на $EX$ и $DX$ следва, че\\
+\centerline{$EX=np, \qquad DX=npq, \qquad \sigma_{x}=\sqrt{npq}$.}
+\\Тълкуване: Провеждат се $n$ опита по схемата на Бернули с вероятност $p$ за успех при един опит. Тогава броят на успешните опити $X$ е случайна величина, която има биномно разпределение с параметри $n, p$.\\
+Пр.:
+\begin{itemize}
+	\item Монета е хвърлена 10 пъти. Каква е вероятността да се падне ези точно 6 пъти?\\
+	\item 80\% от хората, които има застраховка на домашните си любимци са жени. Ако на произволен принцип са избрани 9 човека, които са си купили застраховка за домашния си любимец, какъв е шанса точно 6 от тях да са жени? 
+	80% of people who purchase pet insurance are women.  If 9 pet insurance owners are randomly selected, find the probability that exactly 6 are women
+\end{itemize}
+
+
+ 
+\subsection{Геометрично разпределение}
+Нека $p \in (0,1)$\\
+\definition Дискретната с.в. $X$ има \textit{геометрично разпределние} с параметър $p$, ако приема стойности $1,2,...,n,...$ с вероятности\\
+\centerline{$p_{n}=P(X=n)=(1-p)^{n-1}p$.}
+Имаме, че\\
+\centerline{$EX=\frac{1}{p}, \qquad DX = \frac{1-p}{p^{2}}, \qquad \sigma_{X}=\frac{\sqrt{1-p}}{p}$}
+\textit{Тълкуване:} Провежда се редица от независими опити с вероятност за успех при един опит $p$. Тогава номерът $X$ на първия успешен опит е случайна величина, която има геометрично разпределение.\\
+Примери:
+\begin{itemize}
+	\item Хвърляме честна монета няколко пъти. Тогава \\
+		\centerline{$X=$ броя хвърляния до първото падане на ези}
+	\item Знаем, че 20\% от прдуктите върху една продуктова линия са дефектни. Изследваме продуктите, докато не намерим първия дефектен продукт. Тогава \\
+		\centerline{$X=$ броя изследвани продукти до намиране на първия дефектен}
+\end{itemize}
+
+\subsection{Поасоново разпределение}
+Нека $\lambda > 0$.\\
+\definition Дискретната с.в. $X$ има \textit{разпределение на Поасон} с параметър $\lambda$, ако приема стойности $0,1,...,m,...$ с вероятности\\
+\centerline{$p_{m}=P(X=m)=\frac{\lambda^{m}}{m!}e^{-\lambda}$.}
+Имаме, че\\
+\centerline{$EX=\lambda, \qquad DX=\lambda, \\qquad \sigma_{x}=\sqrt{\lambda}$}
+Пр.: Случайни величини, които имат разпределение на Поасон, се срещат често в теорията на масовото обслужване, теорията на надеждността, теорията на управление на запасите, биологията, физиката и др.
+рията на управление на запасите, биологията, физиката и др.
+Типични примери за случайни величини, имащи разпределение на
+Поасон са следните:
+\begin{itemize}
+	\item брой на космически частици, които попадат през определен период от време върху повърхнината на датчик за регистриране на такива\\
+	\item брой на телефонните повиквания, постъпващи за определено време\\
+	\item брой на нишките, които са се скъсали на тъкачен стан за определено време
+\end{itemize}
+
+
+\end{document}
+
+
+
+
