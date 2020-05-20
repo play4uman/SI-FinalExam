@@ -6,6 +6,7 @@
 *.synctex
 *.pyg
 /Databases
+**/Formulas/*
 !Konspekt_DI_SI_2018_02.pdf
 NotMine/Programming/C++_Basics/11.C++_Basics.tex
 _minted*/
