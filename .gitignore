@@ -5,6 +5,7 @@
 *.out
 *.synctex
 *.pyg
+*.zip
 /Databases
 **/Formulas/*
 !Konspekt_DI_SI_2018_02.pdf
