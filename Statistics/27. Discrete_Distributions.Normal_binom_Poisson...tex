@@ -168,27 +168,12 @@
 \end{itemize} 
 
 \subsection{Равномерно разпределение}
-Нека $a<b$
-\definition Непрекъснатата случ. величина(с.в.) $X$ се нарича \textit{равномерно разпределена в интервала} $[a,b]$, ако има плътност на разпределение \\
-\centerline{$p(x)=
-\begin{cases} 
-      \frac{1}{b-a} & \text{ ако } x \in [a,b],\\
-      0 & \text{ ако } x \not\in [a,b].
-\end{cases}$}
-Фунцкията на разпределение на такава с.в. е \\
-$F(x) = 
-\begin{cases} 
-      0 & \text{ ако } x < a,\\
-      \frac{x-a}{b-a} & \text{ ако } a \leq x \leq b,\\
-      1 & \text{ ако } x > b.
-\end{cases}$\\
-\textbf{$E(X):$} $E(X)=\integral{a}{b}{\dfrac{x}{b-a}{dx}}=\dfrac{1}{b-a}\integral{a}{b}{x}{dx}=\dfrac{1}{b-a}\dfrac{x^{2}}{2}\bigg\rvert^{b}_{a}=\dfrac{1}{b-a}\dfrac{b^{2}}{2}-\dfrac{a^{2}}{2}=$\\
-\centerline{$=\dfrac{(b-a)(b+a)}{2(b-a)}=\dfrac{b+a}{2}$}
+\definition Случайната величина $X$ има дискретно равномерно разпределение ($X \sim U(n)$), ако приема стойностите $1,2,...,n$ с еднаква вероятност, т.е $\dfrac{1}{n}$., т.е.:\\ \centerline{$p_{i}=P\curlies{X=i}=\dfrac{1}{n}; i=1,2,3,...,n$}\\Без загуба на общност, можем да приемем, че случайната величина приема като стойности първите $n$ цели числа. Очакването и стандартното отклонение са:\\
+$E(X)=\displaystyle \sum_{x \in \Omega_x} x P_r(X=x)= \sum_{k=1}^n k(\frac{1}{n})=\dfrac{1}{n} \sum_{k=1}^n k=\dfrac{1}{n}\dfrac{n(n+1)}{2}=\dfrac{n+1}{2}$\\
 $var(X)=E(x^{2})-[E(X)]^{2}$\\
-$E(X^{2})=\dfrac{1}{b-a}\integral{a}{b}{x^{2}}{dx}=\dfrac{1}{b-a}\dfrac{x^{3}}{3}\bigg\rvert^{b}_{a}=\dfrac{b^{3}-a^{3}}{3(b-a)}=\dfrac{(a^{2}+ab+b^{2})(b-a)}{3(b-a)}=\dfrac{a^{2}+2ab+b^{2}}{3}$\\
-$var(X)=\dfrac{a^{2}+ab+b^{2}}{3}-\dfrac{a^{2}+2ab+b^{2}}{4}=\dfrac{a^{2}-2ab+b^{2}}{12}=\dfrac{(a-b)^{2}}{12}$\\
-$\sigma(X)=\sqrt{var(X)}=\dfrac{|a-b|}{\sqrt{12}}$
-\newpage
+$E(X^2)=\displaystyle \sum_{x \in \Omega_x} x^2 P_r(X=x)=\sum_{k=1}^n k^2 (\frac{1}{n})=\dfrac{1}{n} \sum_{k=1}^n k^2=\dfrac{1}{n}\dfrac{n(n+1)(2n+1)}{6}=\dfrac{(n+1)(2n+1)}{6}$\\
+$var(X)=\dfrac{(n+1)(2n+1)}{6}-\dfrac{(n+1)^2}{4}=\dfrac{n^2 -1}{12}$\\
+$\sigma(X)=\sqrt{var(X)}=\sqrt{\dfrac{n^2 -1}{12}}$\\
 Равномерно разпределените случайни величини намират приложение: 
 \begin{itemize}
 	\item в задачи от геометрична вероятност\\
